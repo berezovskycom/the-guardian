@@ -1,0 +1,50 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Lato', sans-serif;
+}
+
+header {
+	text-align: center;
+}
+
+.accordion-wrapper {
+	width: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
+.accordion {
+	background-color: #eee;
+	color: #444;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	text-align: left;
+	border: none;
+	outline: none;
+	transition: .4s;
+}
+
+.active, .accordion:hover {
+	background-color: #ccc;
+}
+
+.panel {
+	padding: 0 18px;
+	background-color: #e3e3e3;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height .2s ease-out;
+}
+
+.link {
+	color: blue;
+	display: block;
+	padding-bottom: 10px;
+}
+
+.error {
+	color: red;
+	text-align: center;
+}
