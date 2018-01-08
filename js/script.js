@@ -1,5 +1,5 @@
 const API_KEY = '00914858-e291-4910-9b4e-47512b633dde';
-let requestUrl = 'https://content.guardianapis.com/search?&show-blocks=body&api-key=' + API_KEY;
+let requestUrl = 'https://content.guardianapis.com/search?&show-blocks=body&api-key=' + API_KEY + '&page=1';
 
 const request = new XMLHttpRequest();
 request.open("GET", requestUrl);
@@ -66,14 +66,28 @@ refreshBtn.addEventListener('click', (e) => {
 const btnPrev = document.querySelector('.prev');
 const btnNext = document.querySelector('.next');
 const pageNum = document.querySelector('.page-num');
-console.log(pageNum.value);
+
+function currentPageValue() {
+	pageNum.value = request.response.response.currentPage;
+}
+
+setTimeout(currentPageValue, 1000);
+
+const getNewPage = function(e) {
+	if (e === "plus") { pageNum.value++ };
+	if (e === "minus") { pageNum.value-- };
+	let newPage = requestUrl.slice(0, -1);
+	newPage += pageNum.value;
+	request.open("GET", newPage);
+	request.send();
+}
+
 btnPrev.onclick = () => {
 	if (pageNum.value <= 1) return;
-	pageNum.value--;
+	getNewPage("minus");
 }
 
 btnNext.onclick = () => {
 	if (pageNum.value > request.response.response.pages) return;
-	pageNum.value++;
-	requestUrl.concat('&page=', pageNum.value);
+	getNewPage("plus");
 }
