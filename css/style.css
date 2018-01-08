@@ -6,9 +6,29 @@ body {
 
 header {
 	text-align: center;
+	padding-bottom: 1em;
 }
 
-.accordion-wrapper {
+header h1 {
+	margin: 0;
+}
+
+.refresh {
+	margin: 12px 0;
+	border: none;
+	outline: none;
+	font-family: inherit;
+	font-weight: bold;	
+	padding: 9px 36px;
+	background-color: rgba(255, 239, 0, .6);
+	transition: background-color .4s ease-in-out;
+}
+
+.refresh:hover {
+	background-color: rgba(255, 239, 0, 1);
+}
+
+.container {
 	width: 50%;
 	display: block;
 	margin: 0 auto;
@@ -32,10 +52,16 @@ header {
 
 .panel {
 	padding: 0 18px;
+	margin: 0;	
 	background-color: #e3e3e3;
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height .2s ease-out;
+}
+
+.panel p {
+	margin-top: 12px;
+	margin-bottom: 0;
 }
 
 .link {
@@ -47,4 +73,69 @@ header {
 .error {
 	color: red;
 	text-align: center;
+}
+
+.btn-controls {
+	position: absolute;
+	background-color: rgba(0,0,0, .3);
+	top: 50%;
+	padding: 8px 16px;
+	border-radius: 50%;
+	display: inline-block;
+	text-align: center;
+	font-size: 18px;
+	font-family: sans-serif;
+	color: #fff;
+	transition: background-color .1s ease-in;
+}
+
+.btn-controls:hover {
+	background-color: rgba(0,0,0, .4);
+}
+
+.prev {
+	left: 10%;
+}
+
+.next {
+	right: 10%;
+}
+
+.count {
+	position: absolute;
+	bottom: 2%;
+	right: 2%;
+}
+
+.page-num {
+	border: none;
+	outline: none;
+	width: 3em;
+	background-color: #e3e3e3;
+	text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+@media(min-width: 320px) and (max-width: 640px) {
+	.container {
+		width: 100%;
+	}
+
+	.btn-controls {
+		position: static;
+		border-radius: 0;
+		width: 40%;
+		margin: 4%;
+	}
+
+	.count {
+		position: static;
+		text-align: center;
+		padding-bottom: 5%;
+	}
 }
