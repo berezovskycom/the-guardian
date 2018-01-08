@@ -1,72 +1,79 @@
-const API_KEY = 'a1c8a868-7843-408a-be09-d22963a6ffc9'
-const requestUrl = 'https://content.guardianapis.com/search?&show-blocks=body&api-key=' + API_KEY;
-const accWrapper = document.querySelector('.accordion-wrapper');
-const refreshBtn = document.querySelector('.refresh');
+const API_KEY = '00914858-e291-4910-9b4e-47512b633dde';
+let requestUrl = 'https://content.guardianapis.com/search?&show-blocks=body&api-key=' + API_KEY;
 
 const request = new XMLHttpRequest();
 request.open("GET", requestUrl);
 request.responseType = 'json';
 request.send();
 
+const totalPages = document.querySelector('.total-pages');
+
+const errHandler = function() {
+	if (request.statusText === '') {
+		document.querySelector('main').style.display = 'none';
+		const err = document.createElement('div');
+		err.className = 'error';
+		err.textContent = 'Sorry, we couldn\'t find the news for you. Please try again later.';
+		document.body.appendChild(err);
+	}	
+};
+
+setTimeout(errHandler, 3000);
+
+const acc = document.querySelectorAll('.accordion');
+const panel = document.querySelectorAll('.panel');
+let i;
+
+const truncate = function( n, useWordBoundary ) {
+  if (this.length <= n) { return this; }
+  let subString = this.substr(0, n-1);
+  return (useWordBoundary 
+       ? subString.substr(0, subString.lastIndexOf(' ')) 
+       : subString) + "...";
+};
+
 const refresh = function() {
 	const title = request.response.response['results'];
-	title.forEach( (n) => {
-		display(n['webTitle'], n.blocks.body[0].bodyTextSummary, n.webUrl);
-	});
+
+	for(i = 0; i < acc.length; i++) {
+		acc[i].textContent = title[i].webTitle;
+		panel[i].innerHTML = `<p>${truncate.apply(title[i].blocks.body[0].bodyTextSummary, [256, true])}</p><br><a href="${title[i].webUrl}" class="link">Read full News</a>`;
+	}
+	totalPages.textContent = request.response.response.pages;
 };
 
 request.onload = refresh;
 
-refreshBtn.addEventListener('click', request);
+for (i = 0; i < acc.length; i++) {
+	acc[i].addEventListener('click', function() {
+		this.classList.toggle('active');
 
-const display = function(news, desc, url) {
-	let obj = {};
-	obj.title = document.createElement('button');
-	obj.title.className = 'accordion';
-	obj.title.textContent = news;
+		let panel = this.nextElementSibling;
+		if (panel.style.maxHeight) {
+			panel.style.maxHeight = null;
+		} else {
+			panel.style.maxHeight = panel.scrollHeight + 'px';
+		}
+	})
+}
 
-	const acc = document.querySelectorAll('.accordion');
-	let i;
-	console.log(acc.length);
-	for (i = 0; i < acc.length; i++) {
-		acc[i].addEventListener('click', function() {
-			this.classList.toggle('active');
-			let panel = this.nextElementSibling;
-			if (panel.style.maxHeight) {
-				panel.style.maxHeight = null;
-			} else {
-				panel.style.maxHeight = panel.scrollHeight + 'px';
-			}
-		})
-	}
+const refreshBtn = document.querySelector('.refresh');
 
-	accWrapper.appendChild(obj.title);
+refreshBtn.addEventListener('click', (e) => {
+	
+});
 
+const btnPrev = document.querySelector('.prev');
+const btnNext = document.querySelector('.next');
+const pageNum = document.querySelector('.page-num');
+console.log(pageNum.value);
+btnPrev.onclick = () => {
+	if (pageNum.value <= 1) return;
+	pageNum.value--;
+}
 
-	descWrapper = document.createElement('div');
-	descWrapper.className = 'panel';
-
-	obj.desc = document.createElement('p');
-
-	obj.truncate = function( n, useWordBoundary ) {
-    if (this.length <= n) { return this; }
-    var subString = this.substr(0, n-1);
-    return (useWordBoundary 
-       ? subString.substr(0, subString.lastIndexOf(' ')) 
-       : subString) + "...";
-	};
-
-	obj.desc.textContent = obj.truncate.apply(desc, [256, true]);
-
-
-	obj.link = document.createElement('a');
-	obj.link.textContent = 'Read full news';
-	obj.link.setAttribute('href', url);
-	obj.link.className = 'link';
-
-	descWrapper.appendChild(obj.desc);
-	descWrapper.appendChild(obj.link);
-	accWrapper.appendChild(descWrapper);
-
-	return obj;
+btnNext.onclick = () => {
+	if (pageNum.value > request.response.response.pages) return;
+	pageNum.value++;
+	requestUrl.concat('&page=', pageNum.value);
 }
