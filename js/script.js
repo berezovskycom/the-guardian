@@ -58,6 +58,12 @@ for (i = 0; i < acc.length; i++) {
 }
 
 const refreshBtn = document.querySelector('.refresh');
+
+refreshBtn.addEventListener('click', (e) => {
+	request.open("GET", requestUrl);
+	request.send();
+});
+
 const btnPrev = document.querySelector('.prev');
 const btnNext = document.querySelector('.next');
 const pageNum = document.querySelector('.page-num');
