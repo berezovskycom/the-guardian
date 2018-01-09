@@ -150,5 +150,6 @@ input[type=number]::-webkit-outer-spin-button {
 		position: static;
 		text-align: center;
 		padding-bottom: 5%;
+		
 	}
 }

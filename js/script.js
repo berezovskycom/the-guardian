@@ -58,9 +58,6 @@ for (i = 0; i < acc.length; i++) {
 }
 
 const refreshBtn = document.querySelector('.refresh');
-
-
-
 const btnPrev = document.querySelector('.prev');
 const btnNext = document.querySelector('.next');
 const pageNum = document.querySelector('.page-num');
