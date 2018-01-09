@@ -59,9 +59,7 @@ for (i = 0; i < acc.length; i++) {
 
 const refreshBtn = document.querySelector('.refresh');
 
-refreshBtn.addEventListener('click', (e) => {
-	
-});
+
 
 const btnPrev = document.querySelector('.prev');
 const btnNext = document.querySelector('.next');
