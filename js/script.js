@@ -66,16 +66,22 @@ refreshBtn.addEventListener('click', (e) => {
 const btnPrev = document.querySelector('.prev');
 const btnNext = document.querySelector('.next');
 const pageNum = document.querySelector('.page-num');
+const countForm = document.querySelector('.count');
 
 function currentPageValue() {
 	pageNum.value = request.response.response.currentPage;
 }
 
-setTimeout(currentPageValue, 1000);
+setTimeout(currentPageValue, 700);
 
 const getNewPage = function(e) {
-	if (e === "plus") { pageNum.value++ };
-	if (e === "minus") { pageNum.value-- };
+	if (e === "plus") { 
+		pageNum.value++; 
+	} else if (e === "minus") {
+		pageNum.value--;
+	} else {
+		pageNum.value += parseInt(e);
+	};
 	let newPage = requestUrl.slice(0, -1);
 	newPage += pageNum.value;
 	request.open("GET", newPage);
@@ -90,4 +96,13 @@ btnPrev.onclick = () => {
 btnNext.onclick = () => {
 	if (pageNum.value > request.response.response.pages) return;
 	getNewPage("plus");
+	removeDisabled();
 }
+
+countForm.addEventListener('submit', function(e) {
+	e.preventDefault();
+	let newPage = requestUrl.slice(0, -1);
+	newPage += pageNum.value;
+	request.open("GET", newPage);
+	request.send();	
+}, false);
