@@ -35,10 +35,10 @@ Add pagination block.
 ##### Requirements
 1. under the news list there should be a block with pagination that
 contains:
-1) "< Previous Page" button;
-2) an indicator of a current page: "[2] of 12421 pages", where
+- "< Previous Page" button;
+- an indicator of a current page: "[2] of 12421 pages", where
 the number of current a page is an input field;
-3) "Next Page >" button;
+- "Next Page >" button;
 2. when a user is on the first page, the "< Previous Page" button
 should be disabled;
 3. when a user is on the last page, the "Next Page >" button
