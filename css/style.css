@@ -20,12 +20,14 @@ header h1 {
 	font-family: inherit;
 	font-weight: bold;	
 	padding: 9px 36px;
-	background-color: rgba(34, 167, 240, 1);
+	background-color: rgba(69,102,142,1);
+	color: rgb(255,255,255);
+	letter-spacing: 1px;
 	transition: background-color .2s ease-in-out;
 }
 
 .refresh:hover {
-	background-color: rgba(34, 167, 240, .7);
+	background-color: rgba(69,102,142,.9);
 }
 
 .container {
@@ -35,8 +37,8 @@ header h1 {
 }
 
 .accordion {
-	background-color: #eee;
-	color: #444;
+	background-color: rgb(238,238,238);
+	color: rgb(68, 68, 68);
 	cursor: pointer;
 	padding: 18px;
 	width: 100%;
@@ -44,16 +46,48 @@ header h1 {
 	border: none;
 	outline: none;
 	transition: .4s;
+	position: relative;
 }
 
 .active, .accordion:hover {
-	background-color: #ccc;
+	background-color: rgb(204, 204, 204);
+}
+
+.icon {
+	position: relative;
+	top: -12px;
+	left: 96%;
+	width: 20px;
+	height: 20px;
+	color: rgb(102, 102, 102);
+}
+
+.icon:before,
+.icon:after{
+	position: absolute;
+	display: block;
+	content: '';
+  width:3px;
+  height:10px;
+  box-shadow:0 0 0 16px inset;
+  top: 15px;
+	left: 10px;
+	transition: all .4s ease-in-out;
+}
+
+.icon:before {
+	transform: rotateZ(-60deg);
+	left: 3px;
+}
+
+.icon:after {
+	transform: rotateZ(60deg);
 }
 
 .panel {
 	padding: 0 18px;
 	margin: 0;	
-	background-color: #e3e3e3;
+	background-color: rgb(227, 227, 227);
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height .2s ease-out;
@@ -87,7 +121,7 @@ header h1 {
 	text-align: center;
 	font-size: 18px;
 	font-family: sans-serif;
-	color: #fff;
+	color: rgb(255, 255, 255);
 	transition: background-color .1s ease-in;
 }
 
@@ -109,7 +143,7 @@ header h1 {
 }
 
 .count {
-	position: absolute;
+	position: fixed;
 	bottom: 2%;
 	right: 2%;
 }
@@ -118,7 +152,7 @@ header h1 {
 	border: none;
 	outline: none;
 	width: 3em;
-	background-color: #e3e3e3;
+	background-color: rgb(227, 227, 227);
 	text-align: center;
 }
 
@@ -131,7 +165,7 @@ input[type=number]::-webkit-outer-spin-button {
 @media(min-width: 320px) and (max-width: 640px) {
 
 	header h1 {
-		padding-top: 1.5em;
+		padding-top: .7em;
 	}
 
 	.container {
@@ -151,5 +185,9 @@ input[type=number]::-webkit-outer-spin-button {
 		text-align: center;
 		padding-bottom: 5%;
 		
+	}
+
+	.icon {
+		display: none;
 	}
 }
