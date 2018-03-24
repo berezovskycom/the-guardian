@@ -17,7 +17,6 @@ const pageNum = document.querySelector('.page-num');
 const countForm = document.querySelector('.count');
 let i;
 
-<<<<<<< HEAD
 // error message
 const errHandler = () => {
   if (request.statusText === '') {
@@ -27,7 +26,6 @@ const errHandler = () => {
     err.textContent = 'Sorry, we couldn\'t find the news for you. Please try again later.';
     document.body.appendChild(err);
   }
-=======
 
 // error message
 const errHandler = function() {
@@ -38,7 +36,6 @@ const errHandler = function() {
 		err.textContent = 'Sorry, we couldn\'t find the news for you. Please try again later.';
 		document.body.appendChild(err);
 	}	
->>>>>>> 8b348e34493f08a76d35d502216c429aa5e6464d
 };
 
 setTimeout(errHandler, 3000);
@@ -54,7 +51,6 @@ const truncate = function( n, useWordBoundary ) {
 
 // function to work with pseudo elements
 let UID = {
-<<<<<<< HEAD
   _current: 0,
   getNew: function(){
     this._current++;
@@ -153,7 +149,6 @@ const getNewPage = (e) => {
   request.open('GET', newPage);
   request.send();
 };
-=======
 	_current: 0,
 	getNew: function(){
 		this._current++;
@@ -250,7 +245,6 @@ const getNewPage = function(e) {
 	request.open("GET", newPage);
 	request.send();
 }
->>>>>>> 8b348e34493f08a76d35d502216c429aa5e6464d
 
 btnPrev.onclick = () => {
   if (pageNum.value <= 1) return;
@@ -258,7 +252,6 @@ btnPrev.onclick = () => {
 };
 
 btnNext.onclick = () => {
-<<<<<<< HEAD
   if (pageNum.value > request.response.response.pages) return;
   getNewPage('plus');
 };
@@ -271,7 +264,6 @@ countForm.addEventListener('submit', (e) => {
   request.open('GET', newPage);
   request.send();
 }, false);
-=======
 	if (pageNum.value > request.response.response.pages) return;
 	getNewPage("plus");
 }
@@ -284,4 +276,3 @@ countForm.addEventListener('submit', function(e) {
 	request.open("GET", newPage);
 	request.send();	
 }, false);
->>>>>>> 8b348e34493f08a76d35d502216c429aa5e6464d
