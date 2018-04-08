@@ -128,7 +128,7 @@ refreshBtn.addEventListener('click', () => {
 // get new page
 const getNewPage = (e) => {
   if (e === 'plus') {
-    pageNum.value += 1;
+    pageNum.value++;
   } else if (e === 'minus') {
     pageNum.value -= 1;
   } else {
